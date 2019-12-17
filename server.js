@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // Routes
 const users = require("./routes/api/users");
@@ -18,6 +19,10 @@ mongoose
     console.log("MongoDB Connected...");
   })
   .catch(err => console.log(err));
+
+// Body-parser middlewares
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Use routes middleware
 app.use("/api/users", users);
